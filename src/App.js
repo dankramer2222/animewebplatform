@@ -1,13 +1,15 @@
+import { BrowserRouter } from "react-router-dom";
 import Popular from "./Components/Popular";
-import { useGlobalContext } from "./context/global";
+
 
 function App() {
-  const global = useGlobalContext();
-  console.log(global);
+
   return(
+    <BrowserRouter>
     <div className="App">
       <Popular />
     </div>
+    </BrowserRouter>
   )
 }
 
