@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import { Link } from 'react-router-dom';
+import { useGlobalContext } from "../context/global";
 
 const AnimeItemStyled = styled.div`
   padding: 3rem 18rem;
@@ -92,6 +94,42 @@ const AnimeItemStyled = styled.div`
         background-color: #FFFFFF;
 
     }
+  }
+
+  .characters {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 2rem;
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 20px;
+    border: 5px solid #e5e7eb;
+  }
+  
+  .character {
+    padding: .4rem .6rem;
+    border-radius: 7px;
+    background-color: #EDEDED;
+    transition: all .4s ease-in-out;
+  }
+  
+  .character img {
+    width: 100%;
+  }
+  
+  .character h4 {
+    padding: .5rem 0;
+    color: #454e56;
+  }
+  
+  .character p {
+    color: #27ae60;
+  }
+
+        }
+
+         }
+      }
   }
 `;
 
@@ -223,7 +261,27 @@ function AnimeItem() {
           ></iframe>
         )}
       </div>
+
+      <h3 className="title">Characters</h3>
+<div className="characters">
+  {characters?.map((character, index) => {
+    const { role } = character;
+    const { images, name, mal_id } = character.character;
+
+    return (
+            <Link to={`/character/${mal_id}`} key={index} className="character-link">
+              <div className="character">
+                <img src={images?.jpg.image_url} alt={name} />
+                <h4>{name}</h4>
+                <p>{role}</p>
+              </div>
+            </Link>
+    );
+  })}
+</div>
+
     </AnimeItemStyled>
+
   );
 }
 
