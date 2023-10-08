@@ -27,6 +27,8 @@ export const GlobalContextProvider = ({ children }) => {
         return { ...state, upcomingAnime: action.payload, loading: false };
       case GET_AIRING_ANIME:
         return { ...state, airingAnime: action.payload, loading: false };
+      case GET_PICTURES:
+        return { ...state, pictures:action.payload,loading:false};
       default:
         return state;
     }
@@ -97,7 +99,15 @@ export const GlobalContextProvider = ({ children }) => {
     dispatch({type:GET_UPCOMING_ANIME,payload:data.data})
   }
 
+  //get anime pictures
+  const getAnimePictures = async (id) =>{
+    dispatch({type:LOADING})
+    const response = await fetch(`https://api.jikan.moe/v4/characters/${id}/pictures`);
+    const data = await response.json();
+    dispatch({type:GET_PICTURES,payload:data.data})
 
+
+  }
 
   // initial render
   React.useEffect(() => {
@@ -115,7 +125,8 @@ export const GlobalContextProvider = ({ children }) => {
         search,
         getPopularAnime,
         getUpcomingAnime,
-        getAiringAnime, 
+        getAiringAnime,
+        getAnimePictures 
       }}
     >
       {children}

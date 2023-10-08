@@ -54,6 +54,7 @@ function Homepage() {
                 getPopularAnime()
               }}
             >
+              <i className='fas fa-fire'></i>
               Popular
             </button>
           </div>
